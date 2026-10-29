@@ -2,10 +2,11 @@ import { useState } from 'react';
 import './App.css';
 
 export default function Gallery() {
+  const a = 'Ivan';
   return (
     <>
-      <section>
-        <h1>Woman scientist</h1>
+      <section style={{ border: '4px dashed gray' }}>
+        <h1>Woman scientist, {a}</h1>
         <Profile />
         <Profile />
       </section>
