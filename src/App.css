@@ -10,5 +10,10 @@
 }
 .sc-img {
   display: inline-block;
-  object-fit: fill;
+  object-fit: contain;
+}
+
+.sc-desc > h4 {
+  margin: 0;
+  font-size: 1.5rem;
 }
