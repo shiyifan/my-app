@@ -1,14 +1,16 @@
 import './App.css';
-import data, { getImageUrl, type Person } from './data.js';
-import { useState, type ReactElement } from 'react';
+import data, { type Person } from './data.js';
+import { useState } from 'react';
+import StyledButton from './StyledButton.js';
+import ScientistItem from './ScientistItem.js';
 
-export default function ScientistList() {
+export default function App() {
   const [index, setIndex] = useState(0);
   const scientists = data.map(s => <Scientist key={s.id} person={s} />);
 
   return (
     <section>
-      <button onClick={() => setIndex(index + 1)}>Click Me!({index})</button>
+      <StyledButton onClick={() => setIndex(index + 1)}>Click Me!({index})</StyledButton>
       <h2>Scientist List:</h2>
       <ul>{scientists}</ul>
     </section>
@@ -18,13 +20,7 @@ export default function ScientistList() {
 function Scientist({ person }: { person: Person }) {
   return (
     <li className="sc-item">
-      <img className="sc-img" src={getImageUrl(person)} alt="" />
-      <div className="sc-desc">
-        <h4>{person.name}</h4>
-        <p>
-          Profession: {person.profession}, known for <span>{person.accomplishment}</span>
-        </p>
-      </div>
+      <ScientistItem person={person} />
     </li>
   );
 }

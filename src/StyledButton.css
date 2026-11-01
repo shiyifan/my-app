@@ -1,0 +1,10 @@
+.styled-btn {
+  padding-block: 1.45em;
+  padding-inline: 1.8em;
+  font-size: 1.1rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.styled-btn:hover {
+  background-color: aliceblue;
+}
