@@ -1,12 +1,14 @@
 import './App.css';
 import data, { getImageUrl, type Person } from './data.js';
-import type { ReactElement } from 'react';
+import { useState, type ReactElement } from 'react';
 
 export default function ScientistList() {
+  const [index, setIndex] = useState(0);
   const scientists = data.map(s => <Scientist key={s.id} person={s} />);
 
   return (
     <section>
+      <button onClick={() => setIndex(index + 1)}>Click Me!({index})</button>
       <h2>Scientist List:</h2>
       <ul>{scientists}</ul>
     </section>
@@ -26,4 +28,3 @@ function Scientist({ person }: { person: Person }) {
     </li>
   );
 }
-
