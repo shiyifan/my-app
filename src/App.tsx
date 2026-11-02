@@ -18,9 +18,12 @@ export default function App() {
 }
 
 function Scientist({ person }: { person: Person }) {
+  const [count, setCount] = useState(0);
   return (
     <li className="sc-item">
+      <button onClick={() => setCount(count + 1)}>count({count})</button>
       <ScientistItem person={person} />
     </li>
   );
 }
+
