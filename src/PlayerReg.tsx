@@ -1,11 +1,17 @@
-import { useState, type ChangeEvent } from 'react';
+import { useState, type ChangeEvent, type SubmitEvent } from 'react';
+import './PlayerReg.css';
+import PlayerList, { type Player } from './PlayerList';
+
+let playerCount = 0;
 
 export default function PlayerReg() {
-  const [profile, setProfile] = useState({ name: '', age: 0, address: { city: '', street: '' } });
+  const defaultProfile: Player = { id: 0, name: '', age: 0, address: { city: '', street: '' } };
+  const [profile, setProfile] = useState(defaultProfile);
+  const [players, setPlayers] = useState([] as Player[]);
 
   return (
-    <>
-      <form>
+    <div className="player-reg">
+      <form onSubmit={handleSave}>
         <label>
           Name: <input type="text" name="name" value={profile.name} onChange={handleChange} />
         </label>
@@ -18,8 +24,11 @@ export default function PlayerReg() {
         <label>
           Street: <input type="text" name="street" value={profile.address.street} onChange={handleChange} />
         </label>
+        <input type="submit" value={'Save'} />
       </form>
-    </>
+
+      <PlayerList players={players} />
+    </div>
   );
 
   function handleChange(e: ChangeEvent<HTMLInputElement, HTMLInputElement>) {
@@ -42,5 +51,11 @@ export default function PlayerReg() {
         setProfile({ ...profile, address: { ...profile.address, street: newValue } });
         break;
     }
+  }
+
+  function handleSave(e: SubmitEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setPlayers([...players, { ...profile, id: playerCount++ }]);
+    setProfile({ ...defaultProfile });
   }
 }

@@ -1,0 +1,22 @@
+.player-name {
+  font-size: 1.4em;
+  margin-block: 0.2em;
+}
+
+.player-age {
+  font-size: 0.9em;
+  color: rgb(150, 150, 150);
+  margin-inline-start: 0.2em;
+}
+.player-age::before {
+  content: '(';
+}
+.player-age::after {
+  content: ')';
+}
+
+.player-address {
+  display: flex;
+  column-gap: 0.2em;
+  margin-block: 0.2em;
+}
