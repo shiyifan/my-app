@@ -9,23 +9,26 @@ export default function PlayerReg() {
   const defaultProfile: Player = { id: 0, name: '', age: 0, address: { city: '', street: '' } };
   const [profile, setProfile] = useState(defaultProfile);
   const [players, updatePlayers] = useImmer([] as Player[]);
+  const [saving, setSaving] = useState(false);
+
+  const canSubmit = !saving && profile.name && profile.age > 0 && profile.address.city && profile.address.street;
 
   return (
     <div className="player-reg">
       <form onSubmit={handleSave}>
         <label>
-          Name: <input type="text" name="name" value={profile.name} onChange={handleChange} />
+          Name: <input type="text" name="name" disabled={saving} value={profile.name} onChange={handleChange} />
         </label>
         <label>
-          Age: <input type="number" name="age" value={profile.age || ''} onChange={handleChange} />
+          Age: <input type="number" name="age" disabled={saving} value={profile.age || ''} onChange={handleChange} />
         </label>
         <label>
-          City: <input type="text" name="city" value={profile.address.city} onChange={handleChange} />
+          City: <input type="text" name="city" disabled={saving} value={profile.address.city} onChange={handleChange} />
         </label>
         <label>
-          Street: <input type="text" name="street" value={profile.address.street} onChange={handleChange} />
+          Street: <input type="text" name="street" disabled={saving} value={profile.address.street} onChange={handleChange} />
         </label>
-        <input type="submit" value={'Save'} />
+        <input type="submit" disabled={!canSubmit} value={'Save'} />
       </form>
 
       <PlayerList players={players} onPlayerUpdate={handlePlayerUpdate} />
@@ -54,8 +57,13 @@ export default function PlayerReg() {
     }
   }
 
-  function handleSave(e: SubmitEvent<HTMLFormElement>) {
+  async function handleSave(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    setSaving(true);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setSaving(false);
+
     updatePlayers([...players, { ...profile, id: playerCount++ }]);
     setProfile({ ...defaultProfile });
   }
