@@ -27,7 +27,7 @@ export default function PlayerReg() {
         <input type="submit" value={'Save'} />
       </form>
 
-      <PlayerList players={players} />
+      <PlayerList players={players} onPlayerUpdate={handlePlayerUpdate} />
     </div>
   );
 
@@ -57,5 +57,16 @@ export default function PlayerReg() {
     e.preventDefault();
     setPlayers([...players, { ...profile, id: playerCount++ }]);
     setProfile({ ...defaultProfile });
+  }
+
+  function handlePlayerUpdate(playerId: number) {
+    const newPlayers = players.map(p => {
+      if (p.id === playerId) {
+        return { ...p, address: { ...p.address, city: p.address.city + '?' } };
+      } else {
+        return p;
+      }
+    });
+    setPlayers(newPlayers);
   }
 }

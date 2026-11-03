@@ -1,12 +1,12 @@
 import styles from './PlayerList.module.css';
 
-export default function PlayerList({ players }: { players: Player[] }) {
-  const playerJsx = players.map(p => <PlayerItem key={p.id} player={p} />);
+export default function PlayerList({ players, onPlayerUpdate }: { players: Player[]; onPlayerUpdate: PlayerUpdateHandler }) {
+  const playerJsx = players.map(p => <PlayerItem key={p.id} player={p} onUpdate={() => onPlayerUpdate(p.id)} />);
 
   return <ol>{playerJsx}</ol>;
 }
 
-function PlayerItem({ player }: { player: Player }) {
+function PlayerItem({ player, onUpdate }: { player: Player; onUpdate: PlayerUpdateHandler }) {
   return (
     <li>
       <h1 className={styles['player-name']}>
@@ -16,15 +16,10 @@ function PlayerItem({ player }: { player: Player }) {
       <p className={styles['player-address']}>
         <span>{player.address.city}</span>
         <span>{player.address.street}</span>
-        <button onClick={handleClick}>update</button>
+        <button onClick={() => onUpdate(player.id)}>update</button>
       </p>
     </li>
   );
-
-  function handleClick() {
-    player.address.city += '?';
-
-  }
 }
 
 export interface Player {
@@ -36,3 +31,5 @@ export interface Player {
     street: string;
   };
 }
+
+type PlayerUpdateHandler = (playerId: number) => void;
