@@ -1,18 +1,17 @@
 import { useState } from 'react';
-import type { ChangeEvent, ChangeEventHandler, MouseEventHandler, ReactNode, SubmitEvent } from 'react';
+import type { ChangeEvent, ReactNode, SubmitEvent } from 'react';
 import type { Person } from './data';
 
 export default function SayHello({ person }: { person: Person }) {
-  const [recipient, setRecipient] = useState('Alice');
-  const [message, setMessage] = useState('');
+  const [recpMsg, setRecpMsg] = useState({ recipient: 'Alice', message: '' });
   const [result, setResult] = useState('');
 
   const firstName = person.name.split(' ')[0];
 
   return (
     <form onSubmit={handleSubmit}>
-      <To recipient={recipient} onRecipientChange={r => setRecipient(r)} />
-      <MessageBox message={message} onMessageChange={m => setMessage(m)} />
+      <To recipient={recpMsg.recipient} onRecipientChange={r => setRecpMsg({ ...recpMsg, recipient: r })} />
+      <MessageBox message={recpMsg.message} onMessageChange={m => setRecpMsg({ ...recpMsg, message: m })} />
       <Submit>Send</Submit>
       {result && <p>{result}</p>}
     </form>
@@ -20,7 +19,7 @@ export default function SayHello({ person }: { person: Person }) {
 
   function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    setResult(`${firstName} say hello to '${recipient}': ${message}`);
+    setResult(`${firstName} say hello to '${recpMsg.recipient}': ${recpMsg.message}`);
   }
 }
 
