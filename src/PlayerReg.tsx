@@ -1,13 +1,14 @@
 import { useState, type ChangeEvent, type SubmitEvent } from 'react';
 import './PlayerReg.css';
 import PlayerList, { type Player } from './PlayerList';
+import { useImmer } from 'use-immer';
 
 let playerCount = 0;
 
 export default function PlayerReg() {
   const defaultProfile: Player = { id: 0, name: '', age: 0, address: { city: '', street: '' } };
   const [profile, setProfile] = useState(defaultProfile);
-  const [players, setPlayers] = useState([] as Player[]);
+  const [players, updatePlayers] = useImmer([] as Player[]);
 
   return (
     <div className="player-reg">
@@ -55,18 +56,14 @@ export default function PlayerReg() {
 
   function handleSave(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    setPlayers([...players, { ...profile, id: playerCount++ }]);
+    updatePlayers([...players, { ...profile, id: playerCount++ }]);
     setProfile({ ...defaultProfile });
   }
 
   function handlePlayerUpdate(playerId: number) {
-    const newPlayers = players.map(p => {
-      if (p.id === playerId) {
-        return { ...p, address: { ...p.address, city: p.address.city + '?' } };
-      } else {
-        return p;
-      }
+    updatePlayers(draft => {
+      const p = draft.find(p => p.id === playerId)!;
+      p.address.city += '+';
     });
-    setPlayers(newPlayers);
   }
 }
