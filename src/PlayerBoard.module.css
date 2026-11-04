@@ -1,0 +1,26 @@
+.player-board {
+  display: flex;
+  column-gap: 0.8em;
+  padding-block: 0.5em;
+}
+
+.score-counter {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  padding-inline: 1.5em;
+  padding-block: 0.8em;
+  border: 2px solid rgb(141, 141, 141);
+  border-radius: 15%;
+}
+
+.score-counter > .player-name {
+  margin-block: 0;
+}
+
+.score-counter > .score {
+  margin-block-start: 0.1em;
+  margin-block-end: 0.5em;
+  font-size: 1.8rem;
+  color: rgb(116, 116, 116);
+}

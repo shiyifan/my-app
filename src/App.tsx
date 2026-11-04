@@ -4,6 +4,7 @@ import { useState } from 'react';
 import StyledButton from './StyledButton.js';
 import ScientistItem from './ScientistItem.js';
 import PlayerReg from './PlayerReg.js';
+import PlayerBoard from './PlayerBoard.js';
 
 export default function App() {
   const [index, setIndex] = useState(0);
@@ -12,6 +13,7 @@ export default function App() {
   return (
     <section>
       <StyledButton onClick={() => setIndex(index + 1)}>Click Me!({index})</StyledButton>
+      <PlayerBoard />
       <PlayerReg />
       <h2>Scientist List:</h2>
       <ul>{scientists}</ul>
