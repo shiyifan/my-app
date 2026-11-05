@@ -68,10 +68,10 @@ export default function PlayerReg() {
     setProfile({ ...defaultProfile });
   }
 
-  function handlePlayerUpdate(playerId: number) {
+  function handlePlayerUpdate(playerId: number, city: string) {
     updatePlayers(draft => {
       const p = draft.find(p => p.id === playerId)!;
-      p.address.city += '+';
+      p.address.city = city;
     });
   }
 }

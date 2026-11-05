@@ -1,12 +1,39 @@
+import { useReducer, useState } from 'react';
 import styles from './PlayerList.module.css';
 
 export default function PlayerList({ players, onPlayerUpdate }: { players: Player[]; onPlayerUpdate: PlayerUpdateHandler }) {
-  const playerJsx = players.map(p => <PlayerItem key={p.id} player={p} onUpdate={() => onPlayerUpdate(p.id)} />);
+  const playerJsx = players.map(p => <PlayerItem key={p.id} player={p} onUpdate={(id, city) => onPlayerUpdate(id, city)} />);
 
   return <ol>{playerJsx}</ol>;
 }
 
 function PlayerItem({ player, onUpdate }: { player: Player; onUpdate: PlayerUpdateHandler }) {
+  const [city, dispatchCity] = useReducer(cityReducer, player.address.city);
+  const [editting, setEditting] = useState(false);
+
+  const updateButton = <button onClick={() => setEditting(true)}>Update City</button>;
+  const saveButton = (
+    <button
+      disabled={city == null || city.length === 0}
+      onClick={() => {
+        setEditting(false);
+        onUpdate(player.id, city);
+      }}
+    >
+      Save
+    </button>
+  );
+  const cancelButton = (
+    <button
+      onClick={() => {
+        setEditting(false);
+        dispatchCity({ type: 'update', value: player.address.city });
+      }}
+    >
+      Cancel
+    </button>
+  );
+
   return (
     <li>
       <h1 className={styles['player-name']}>
@@ -14,12 +41,29 @@ function PlayerItem({ player, onUpdate }: { player: Player; onUpdate: PlayerUpda
         <span className={styles['player-age']}>{player.age}</span>
       </h1>
       <p className={styles['player-address']}>
-        <span>{player.address.city}</span>
+        {!editting && <span>{player.address.city}</span>}
+        {editting && <input type="text" value={city} onChange={e => dispatchCity({ type: 'update', value: e.target.value })} />}
+
         <span>{player.address.street}</span>
-        <button onClick={() => onUpdate(player.id)}>update</button>
+
+        {editting && (
+          <>
+            {saveButton}
+            {cancelButton}
+          </>
+        )}
+        {!editting && updateButton}
       </p>
     </li>
   );
+}
+
+function cityReducer(currentCity: string, action: { type: 'update'; value: string }) {
+  if (action.type === 'update') {
+    return action.value;
+  }
+
+  throw new Error('error action type!');
 }
 
 export interface Player {
@@ -32,4 +76,4 @@ export interface Player {
   };
 }
 
-type PlayerUpdateHandler = (playerId: number) => void;
+type PlayerUpdateHandler = (playerId: number, newValue: string) => void;
