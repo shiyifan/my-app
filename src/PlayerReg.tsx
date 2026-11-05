@@ -1,7 +1,8 @@
-import { useState, type ChangeEvent, type SubmitEvent } from 'react';
-import './PlayerReg.css';
+import { useContext, useState, type ChangeEvent, type SubmitEvent } from 'react';
+import styles from './PlayerReg.module.css';
 import PlayerList, { type Player } from './PlayerList';
 import { useImmer } from 'use-immer';
+import { AppContext, PlayerContext } from './contexts';
 
 let playerCount = 0;
 
@@ -11,10 +12,13 @@ export default function PlayerReg() {
   const [players, updatePlayers] = useImmer([] as Player[]);
   const [saving, setSaving] = useState(false);
 
+  const baseCtx = useContext(AppContext);
+
   const canSubmit = !saving && profile.name && profile.age > 0 && profile.address.city && profile.address.street;
 
   return (
-    <div className="player-reg">
+    <div className={styles['player-reg']}>
+      <p className={styles['player-api-key']}>Request Api: {baseCtx.apiKey}</p>
       <form onSubmit={handleSave}>
         <label>
           Name: <input type="text" name="name" disabled={saving} value={profile.name} onChange={handleChange} />
@@ -31,7 +35,9 @@ export default function PlayerReg() {
         <input type="submit" disabled={!canSubmit} value={'Save'} />
       </form>
 
-      <PlayerList players={players} onPlayerUpdate={handlePlayerUpdate} />
+      <PlayerContext value={{ serverLocation: 'CN' }}>
+        <PlayerList players={players} onPlayerUpdate={handlePlayerUpdate} />
+      </PlayerContext>
     </div>
   );
 

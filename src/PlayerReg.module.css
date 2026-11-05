@@ -1,0 +1,10 @@
+.player-reg {
+  padding-block: 0.8em;
+}
+
+.player-api-key {
+  margin-block: 0.1em;
+  font-family: 'Courier New', Courier, monospace;
+  font-style: italic;
+  color: rgb(138, 138, 138);
+}

@@ -1,5 +1,6 @@
-import { useReducer, useState } from 'react';
+import { useContext, useReducer, useState } from 'react';
 import styles from './PlayerList.module.css';
+import { PlayerContext } from './contexts';
 
 export default function PlayerList({ players, onPlayerUpdate }: { players: Player[]; onPlayerUpdate: PlayerUpdateHandler }) {
   const playerJsx = players.map(p => <PlayerItem key={p.id} player={p} onUpdate={(id, city) => onPlayerUpdate(id, city)} />);
@@ -10,6 +11,8 @@ export default function PlayerList({ players, onPlayerUpdate }: { players: Playe
 function PlayerItem({ player, onUpdate }: { player: Player; onUpdate: PlayerUpdateHandler }) {
   const [city, dispatchCity] = useReducer(cityReducer, player.address.city);
   const [editting, setEditting] = useState(false);
+
+  const serverLocation = useContext(PlayerContext).serverLocation;
 
   const updateButton = <button onClick={() => setEditting(true)}>Update City</button>;
   const saveButton = (
@@ -39,6 +42,7 @@ function PlayerItem({ player, onUpdate }: { player: Player; onUpdate: PlayerUpda
       <h1 className={styles['player-name']}>
         {player.name}
         <span className={styles['player-age']}>{player.age}</span>
+        <span className={styles['player-server-location']}>{serverLocation}</span>
       </h1>
       <p className={styles['player-address']}>
         {!editting && <span>{player.address.city}</span>}
