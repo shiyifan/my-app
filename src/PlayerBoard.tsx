@@ -6,20 +6,11 @@ export default function PlayerBoard() {
   return (
     <div>
       <div className={styles['player-board']}>
-        {firstHidden ? (
-          <ScoreCounter playerName="Roosia" />
-        ) : (
-          <>
-            <ScoreCounter playerName="Ivan" />
-            <ScoreCounter playerName="Roosia" />
-          </>
-        )}
-
-        {/* {!firstHidden && <ScoreCounter playerName="Ivan" />}
-        <ScoreCounter playerName="Roosia" /> */}
+        {!firstHidden && <ScoreCounter playerName="Ivan" />}
+        <ScoreCounter playerName="Roosia" />
       </div>
       <label>
-        <input type="checkbox" onChange={() => setFirstHidden(!firstHidden)} /> Hide the first player
+        <input type="checkbox" onChange={() => setFirstHidden(!firstHidden)} /> Remove the first player
       </label>
     </div>
   );
