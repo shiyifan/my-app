@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-export const AppContext = createContext({
+export const ApiKeyContext = createContext({
   apiKey: '__default_key__',
   update: (() => {
     throw new Error('not implemented');

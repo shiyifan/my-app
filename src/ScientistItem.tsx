@@ -1,12 +1,12 @@
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { type Person, getImageUrl } from './data.js';
 import StyledButton from './StyledButton.js';
 import SayHello from './SayHello';
-import { AppContext } from './contexts.js';
+import { useApiKeyUpdate } from './ApiKeyProvider.js';
 
 export default function ScientistItem({ person }: { person: Person }) {
   const [voteCount, setVoteCount] = useState(0);
-  const updateApi = useContext(AppContext).update;
+  const updateApi = useApiKeyUpdate();
 
   return (
     <>
