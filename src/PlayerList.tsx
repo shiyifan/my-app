@@ -1,4 +1,4 @@
-import { useContext, useReducer, useState } from 'react';
+import { useContext, useReducer, useState, useEffect } from 'react';
 import styles from './PlayerList.module.css';
 import { PlayerContext } from './contexts';
 

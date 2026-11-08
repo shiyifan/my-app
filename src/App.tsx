@@ -1,22 +1,35 @@
 import './App.css';
 import data, { type Person } from './data.js';
-import { useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import StyledButton from './StyledButton.js';
 import ScientistItem from './ScientistItem.js';
 import PlayerReg from './PlayerReg.js';
 import PlayerBoard from './PlayerBoard.js';
 import ApiKeyProvider from './ApiKeyProvider.js';
 import StopWatch from './StopWatch.js';
+import VideoPlayer from './VideoPlayer.js';
 
+let effectCount = 0;
 export default function App() {
   const [index, setIndex] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [showVideo, setShowVideo] = useState(true);
 
   const scientists = data.map(s => <Scientist key={s.id} person={s} />);
+
+  useEffect(() => {
+    console.log('App effect: ', effectCount++);
+  });
 
   return (
     <ApiKeyProvider>
       <section>
-        <StyledButton onClick={() => setIndex(index + 1)}>Click Me!({index})</StyledButton>
+        <StyledButton onClick={() => setIndex(index + 1)}>(App) Click Me!({index})</StyledButton>
+        <StyledButton onClick={() => setPlaying(!playing)}>{playing ? 'Stop' : 'Play'} Video</StyledButton>
+        <StyledButton onClick={() => setShowVideo(!showVideo)}>Show Video</StyledButton>
+
+        {showVideo && <VideoPlayer isPlaying={playing} />}
+
         <StopWatch />
         <PlayerBoard />
         <PlayerReg />
