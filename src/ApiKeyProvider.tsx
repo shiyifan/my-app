@@ -27,7 +27,6 @@ function randStr(length: number = 8) {
 export function useApiKey() {
   return useContext(ApiKeyContext).apiKey;
 }
-
 export function useApiKeyUpdate() {
   return useContext(ApiKeyContext).update;
 }

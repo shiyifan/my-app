@@ -5,7 +5,7 @@ import { PlayerContext } from './contexts';
 export default function PlayerList({ players, onPlayerUpdate }: { players: Player[]; onPlayerUpdate: PlayerUpdateHandler }) {
   const playerJsx = players.map(p => <PlayerItem key={p.id} player={p} onUpdate={(id, city) => onPlayerUpdate(id, city)} />);
 
-  return <ol>{playerJsx}</ol>;
+  return playerJsx.length === 0 ? null : <ol>{playerJsx}</ol>;
 }
 
 function PlayerItem({ player, onUpdate }: { player: Player; onUpdate: PlayerUpdateHandler }) {

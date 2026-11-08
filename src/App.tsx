@@ -6,6 +6,7 @@ import ScientistItem from './ScientistItem.js';
 import PlayerReg from './PlayerReg.js';
 import PlayerBoard from './PlayerBoard.js';
 import ApiKeyProvider from './ApiKeyProvider.js';
+import StopWatch from './StopWatch.js';
 
 export default function App() {
   const [index, setIndex] = useState(0);
@@ -16,6 +17,7 @@ export default function App() {
     <ApiKeyProvider>
       <section>
         <StyledButton onClick={() => setIndex(index + 1)}>Click Me!({index})</StyledButton>
+        <StopWatch />
         <PlayerBoard />
         <PlayerReg />
         <h2>Scientist List:</h2>
