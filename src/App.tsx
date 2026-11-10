@@ -8,6 +8,7 @@ import PlayerBoard from './PlayerBoard.js';
 import ApiKeyProvider from './ApiKeyProvider.js';
 import StopWatch from './StopWatch.js';
 import VideoPlayer from './VideoPlayer.js';
+import GreetDialog from './GreetDialog.js';
 
 let effectCount = 0;
 export default function App() {
@@ -29,6 +30,8 @@ export default function App() {
         <StyledButton onClick={() => setShowVideo(!showVideo)}>Show Video</StyledButton>
 
         {showVideo && <VideoPlayer isPlaying={playing} />}
+
+        <GreetDialog />
 
         <StopWatch />
         <PlayerBoard />
