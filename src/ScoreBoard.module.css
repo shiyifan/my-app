@@ -1,3 +1,12 @@
-.score-list-item {
+.score-board {
+  margin-block: 1em;
+  margin-inline: 0.8em;
+}
+
+.sorted {
   font-size: 1.2rem;
+}
+
+.score-list-item label > * {
+  font-size: 1.5rem;
 }

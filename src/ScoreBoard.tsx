@@ -3,15 +3,28 @@ import { scores } from './data';
 import styles from './ScoreBoard.module.css';
 
 export default function ScoreBoard() {
-  return <ScoreList items={scores} />;
+  const [isAsc, setIsAsc] = useState(true);
+
+  let sorted;
+  if (isAsc) {
+    sorted = scores.toSorted((a, b) => a.score - b.score);
+  } else {
+    sorted = scores.toSorted((a, b) => b.score - a.score);
+  }
+
+  return (
+    <div className={styles['score-board']}>
+      <button className={styles['sorted']} onClick={() => setIsAsc(!isAsc)}>
+        Sorted
+      </button>
+
+      {sorted.length > 0 && <ScoreList items={sorted} />}
+    </div>
+  );
 }
 
 function ScoreList({ items }: { items: ScoreItem[] }) {
   const [selected, setSelected] = useState<number | null>(null);
-
-  if (items.length === 0) {
-    return null;
-  }
 
   const scores = [];
   for (const i of items) {
