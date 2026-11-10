@@ -1,5 +1,16 @@
+.greet-dialog form {
+  --font-size: 1.2rem;
+}
+.greet-dialog label {
+  font-size: var(--font-size);
+}
+
 .greet-dialog button {
-  font-size: 1.2rem;
+  font-size: var(--font-size);
   padding-block: 0.2em;
   padding-inline: 0.8em;
+}
+
+.greet-dialog input {
+  font-size: var(--font-size);
 }
