@@ -49,3 +49,10 @@ export interface Person {
 export function getImageUrl(person: { imageId: string }) {
   return 'https://react.dev/images/docs/scientists/' + person.imageId + 's.jpg';
 }
+
+export const scores = [
+  { id: 3, category: 'list' as const, score: 38 },
+  { id: 32, category: 'graph' as const, score: 13 },
+  { id: 7, category: 'tree' as const, score: 72 },
+  { id: 8, category: 'tree' as const, score: 60 },
+];
