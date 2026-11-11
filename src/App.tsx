@@ -10,6 +10,7 @@ import StopWatch from './StopWatch.js';
 import VideoPlayer from './VideoPlayer.js';
 import GreetDialog from './GreetDialog.js';
 import ScoreBoard from './ScoreBoard.js';
+import Posts from './Posts.js';
 
 let effectCount = 0;
 export default function App() {
@@ -27,6 +28,9 @@ export default function App() {
     <ApiKeyProvider>
       <section>
         <StyledButton onClick={() => setIndex(index + 1)}>(App) Click Me!({index})</StyledButton>
+
+        <Posts />
+
         <StyledButton onClick={() => setPlaying(!playing)}>{playing ? 'Stop' : 'Play'} Video</StyledButton>
         <StyledButton onClick={() => setShowVideo(!showVideo)}>Show Video</StyledButton>
 

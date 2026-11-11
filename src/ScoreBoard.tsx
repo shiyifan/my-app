@@ -1,4 +1,4 @@
-import { useEffect, useState, type ChangeEvent } from 'react';
+import { useEffect, useState, useSyncExternalStore, type ChangeEvent } from 'react';
 import { scores } from './data';
 import styles from './ScoreBoard.module.css';
 
