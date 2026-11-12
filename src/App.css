@@ -17,3 +17,12 @@
   margin: 0;
   font-size: 1.5rem;
 }
+
+.two-posts {
+  display: flex;
+  column-gap: 2.2em;
+}
+
+.two-posts > * {
+  flex-basis: 50%;
+}

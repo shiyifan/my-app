@@ -2,35 +2,10 @@
   padding-block: 1.8em;
 }
 
-.post-wrapper {
+.posts-wrapper {
+  padding-block: 1.5em;
 }
-
-.post-list-wrapper {
-  max-width: 50%;
-  max-height: 300px;
-  overflow: scroll;
-}
-
-.post-criteria {
-  padding-block: 0.6em;
-}
-
-.post-criteria-input-id {
-  font-size: 1.2em;
-}
-
-.post-criteria button {
-  font-size: 1.2em;
-}
-
-.post-list {
-  border-spacing: 0.8em 0;
-}
-
-.post-header {
-  font-size: 1.4em;
+.posts-title {
   margin-block: 0.2em;
 }
-.post-content {
-  margin-block: 0.2em;
-}
+

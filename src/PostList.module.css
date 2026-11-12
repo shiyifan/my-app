@@ -1,0 +1,15 @@
+.post-list-wrapper {
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.post-list {
+  border-spacing: 0.8em 0;
+}
+.post-header {
+  font-size: 1.4em;
+  margin-block: 0.2em;
+}
+.post-content {
+  margin-block: 0.2em;
+}
