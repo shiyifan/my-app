@@ -17,6 +17,7 @@ export function PostSearchCriteriaDecl({
         type="number"
         value={userId ?? undefined}
         onChange={handleChange}
+        placeholder="Please input the user ID"
       />
       {loading && <span>loading...</span>}
     </form>
@@ -49,6 +50,7 @@ export function PostSearchCriteria({ loading, onQuery }: { loading: boolean; onQ
         type="number"
         value={inputId}
         onChange={e => setInputId(e.target.value)}
+        placeholder="Please input the user ID"
       />
 
       <button type="submit" disabled={queryDisable} onClick={() => !queryDisable && onQuery(Number(inputId))}>
