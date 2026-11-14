@@ -15,7 +15,7 @@ export function PostSearchCriteriaDecl({
       <input
         className={styles['post-criteria-input-id']}
         type="number"
-        value={userId ?? undefined}
+        value={userId ?? ''}
         onChange={handleChange}
         placeholder="Please input the user ID"
       />

@@ -1,6 +1,6 @@
 import './App.css';
 import data, { type Person } from './data.js';
-import { useEffect, useState } from 'react';
+import { useEffect, useEffectEvent, useState } from 'react';
 import StyledButton from './StyledButton.js';
 import ScientistItem from './ScientistItem.js';
 import PlayerReg from './PlayerReg.js';
@@ -11,6 +11,7 @@ import VideoPlayer from './VideoPlayer.js';
 import GreetDialog from './GreetDialog.js';
 import ScoreBoard from './ScoreBoard.js';
 import { Posts, PostsDecl } from './Posts.js';
+import OnlineIndicator from './OnlineIndicator.js';
 
 let effectCount = 0;
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
   return (
     <ApiKeyProvider>
       <section>
+        <OnlineIndicator />
         <StyledButton onClick={() => setIndex(index + 1)}>(App) Click Me!({index})</StyledButton>
 
         <div className="two-posts">
