@@ -5,5 +5,7 @@ import cn from 'classnames';
 export default function OnlineIndicator() {
   const online = useOnlineStatus();
 
-  return <div className={cn(styles['online-indicator'])}>{online ? 'Online' : 'Offline'}</div>;
+  const onlineStyle = online ? 'online-indicator__online' : 'online-indicator__offline';
+
+  return <div className={cn(styles['online-indicator'], styles[onlineStyle])}>{online ? 'Online' : 'Offline'}</div>;
 }

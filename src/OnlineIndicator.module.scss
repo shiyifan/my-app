@@ -1,7 +1,14 @@
 $online-color: #277330;
+$offline-color: rgb(184, 59, 59);
 
 .online-indicator {
   float: right;
   font-size: 2em;
+  margin-inline-end: 0.5em;
+}
+.online-indicator__online {
   color: $online-color;
+}
+.online-indicator__offline {
+  color: $offline-color;
 }
