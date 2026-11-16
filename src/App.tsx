@@ -1,6 +1,6 @@
 import './App.css';
 import data, { type Person } from './data.js';
-import { useEffect, useEffectEvent, useState } from 'react';
+import { useCallback, useEffect, useEffectEvent, useState } from 'react';
 import StyledButton from './StyledButton.js';
 import ScientistItem from './ScientistItem.js';
 import PlayerReg from './PlayerReg.js';
@@ -13,7 +13,6 @@ import ScoreBoard from './ScoreBoard.js';
 import { Posts, PostsDecl } from './Posts.js';
 import OnlineIndicator from './OnlineIndicator.js';
 
-let effectCount = 0;
 export default function App() {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -21,14 +20,14 @@ export default function App() {
 
   const scientists = data.map(s => <Scientist key={s.id} person={s} />);
 
-  useEffect(() => {
-    console.log('App effect: ', effectCount++);
-  });
+  const onlineHandler = useCallback(() => {
+    console.log('online changed');
+  }, []);
 
   return (
     <ApiKeyProvider>
       <section>
-        <OnlineIndicator />
+        <OnlineIndicator onOnlineChanged={onlineHandler} />
         <StyledButton onClick={() => setIndex(index + 1)}>(App) Click Me!({index})</StyledButton>
 
         <div className="two-posts">
