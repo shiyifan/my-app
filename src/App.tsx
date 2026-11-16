@@ -12,6 +12,7 @@ import GreetDialog from './GreetDialog.js';
 import ScoreBoard from './ScoreBoard.js';
 import { Posts, PostsDecl } from './Posts.js';
 import OnlineIndicator from './OnlineIndicator.js';
+import FancyWrapper from './FancyWrapper.js';
 
 export default function App() {
   const [index, setIndex] = useState(0);
@@ -30,10 +31,14 @@ export default function App() {
         <OnlineIndicator onOnlineChanged={onlineHandler} />
         <StyledButton onClick={() => setIndex(index + 1)}>(App) Click Me!({index})</StyledButton>
 
-        <div className="two-posts">
-          <PostsDecl />
-          <Posts />
-        </div>
+        <FancyWrapper
+          chd={
+            <div className="two-posts">
+              <PostsDecl />
+              <Posts />
+            </div>
+          }
+        ></FancyWrapper>
 
         <StyledButton onClick={() => setPlaying(!playing)}>{playing ? 'Stop' : 'Play'} Video</StyledButton>
         <StyledButton onClick={() => setShowVideo(!showVideo)}>Show Video</StyledButton>

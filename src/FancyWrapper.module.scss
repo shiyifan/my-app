@@ -1,0 +1,12 @@
+.fancy-wrapper {
+  border: 2px dashed hsl(33, 62%, 58%);
+  padding-block: 1.2em;
+  padding-inline: 0.8em;
+  position: relative;
+}
+
+.fancy-wrapper-btn {
+  position: absolute;
+  left: 2px;
+  top: 2px;
+}
