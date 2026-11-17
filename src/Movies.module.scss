@@ -8,8 +8,22 @@
 
   & > * {
     flex-basis: 10%;
+    font-size: 1em;
+    text-align: center;
+    vertical-align: middle;
   }
 }
-.movies-selector {
-  font-size: 1em;
+
+.transition-btn__actived {
+  display: table;
+
+  & > * {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+.ring {
+  max-height: 100px;
+  overflow-y: scroll;
 }
