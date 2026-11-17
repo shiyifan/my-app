@@ -1,0 +1,15 @@
+.movies {
+}
+
+.movies-selector-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 1.2em;
+
+  & > * {
+    flex-basis: 10%;
+  }
+}
+.movies-selector {
+  font-size: 1em;
+}
