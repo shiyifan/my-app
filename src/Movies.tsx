@@ -5,22 +5,45 @@ export default function Movies() {
   const [selected, setSelected] = useState<'ring' | 'ainocorrida' | 'transpotting'>('ainocorrida');
   const [show, setShow] = useState(false);
 
+  const [first, setFirst] = useState(0);
+  const [second, setSecond] = useState({ name: '' });
+
   return (
     <div className={styles['movies']}>
       <div className={styles['movies-selector-wrapper']}>
-        <TransitionButton isActive={selected === 'ainocorrida'} action={() => setSelected('ainocorrida')}>
+        <TransitionButton
+          isActive={selected === 'ainocorrida'}
+          action={() => {
+            setSelected('ainocorrida');
+            setShow(s => !s);
+          }}
+        >
           Ai No Corida
         </TransitionButton>
-        <TransitionButton isActive={selected === 'ring'} action={() => setSelected('ring')}>
+        <TransitionButton
+          isActive={selected === 'ring'}
+          action={() => {
+            setSelected('ring');
+            setShow(s => !s);
+          }}
+        >
           午夜凶铃
         </TransitionButton>
         <TransitionButton isActive={selected === 'transpotting'} action={() => setSelected('transpotting')}>
           Trainspotting
         </TransitionButton>
 
-        <TransitionButton isActive={false} action={() => setShow(s => !s)}>
+        <TransitionButton
+          isActive={false}
+          action={() => {
+            setShow(s => !s);
+            setFirst(n => n + 1);
+          }}
+        >
           钢的琴
         </TransitionButton>
+
+        <p>{first}</p>
       </div>
       <hr />
 
