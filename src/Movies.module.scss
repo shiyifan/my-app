@@ -14,17 +14,26 @@
   }
 }
 
-.transition-btn__actived {
-  display: table;
-
-  & > * {
-    display: table-cell;
-    vertical-align: middle;
-  }
-}
-
 .transition-btn {
+  @mixin transition-btn-active($color) {
+    display: table;
+    color: $color;
+
+    & > * {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+
   background-color: #f3e0a0;
+
+  &__active {
+    @include transition-btn-active(#323232);
+  }
+
+  &__pending {
+    @include transition-btn-active(#a2a2a2);
+  }
 }
 
 .ring {

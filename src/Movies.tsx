@@ -26,7 +26,6 @@ export default function Movies() {
           action={() => {
             setSelected('ring');
             setShow(s => !s);
-            setFirst(n => n + 1);
           }}
         >
           午夜凶铃
@@ -48,11 +47,11 @@ export default function Movies() {
         <p>{first}</p>
 
         {/* <button onClick={() => setFangHua(f => !f)}>芳华</button> */}
+
         <TransitionButton
           isActive={false}
           action={() => {
             setFangHua(f => !f);
-            setFirst(n => ++n);
           }}
         >
           芳华
@@ -115,7 +114,15 @@ function TransitionButton({ action, children, isActive }: TransitionButtonProp) 
 
   if (isActive) {
     return (
-      <b className={styles['transition-btn__actived']}>
+      <b className={styles['transition-btn__active']}>
+        <span>{children}</span>
+      </b>
+    );
+  }
+
+  if (isPending) {
+    return (
+      <b className={styles['transition-btn__pending']}>
         <span>{children}</span>
       </b>
     );
