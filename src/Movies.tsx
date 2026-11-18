@@ -3,6 +3,7 @@ import styles from './Movies.module.scss';
 
 export default function Movies() {
   const [selected, setSelected] = useState<'ring' | 'ainocorrida' | 'transpotting'>('ainocorrida');
+  const [show, setShow] = useState(false);
 
   return (
     <div className={styles['movies']}>
@@ -16,12 +17,17 @@ export default function Movies() {
         <TransitionButton isActive={selected === 'transpotting'} action={() => setSelected('transpotting')}>
           Trainspotting
         </TransitionButton>
+
+        <TransitionButton isActive={false} action={() => setShow(s => !s)}>
+          钢的琴
+        </TransitionButton>
       </div>
       <hr />
 
       {selected === 'ring' && <Ring />}
       {selected === 'ainocorrida' && <AiNoCorrida />}
       {selected === 'transpotting' && <Trainspotting />}
+      {show && <Piano />}
     </div>
   );
 }
@@ -34,16 +40,20 @@ function Trainspotting() {
   return <h1 style={{ color: 'hsl(240.35deg 74.43% 71.9%)' }}>Transpotting</h1>;
 }
 
+function Piano() {
+  return <h1 style={{ color: 'green' }}>钢的琴</h1>;
+}
+
 function Ring() {
   let rings = [];
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 5; i++) {
     rings.push(<RingItem key={i} />);
   }
   return <ul className={styles['ring']}>{rings}</ul>;
 }
 
 function RingItem() {
-  slowdown(1);
+  slowdown(300);
   return <li>RingRingRing...</li>;
 }
 
