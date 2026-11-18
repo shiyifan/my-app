@@ -1,9 +1,10 @@
-import { useState, useTransition, type ReactNode } from 'react';
+import { memo, useState, useTransition, type ReactNode } from 'react';
 import styles from './Movies.module.scss';
 
 export default function Movies() {
   const [selected, setSelected] = useState<'ring' | 'ainocorrida' | 'transpotting'>('ainocorrida');
   const [show, setShow] = useState(false);
+  const [fangHua, setFangHua] = useState(true);
 
   const [first, setFirst] = useState(0);
   const [second, setSecond] = useState({ name: '' });
@@ -25,6 +26,7 @@ export default function Movies() {
           action={() => {
             setSelected('ring');
             setShow(s => !s);
+            setFirst(n => n + 1);
           }}
         >
           午夜凶铃
@@ -44,6 +46,17 @@ export default function Movies() {
         </TransitionButton>
 
         <p>{first}</p>
+
+        {/* <button onClick={() => setFangHua(f => !f)}>芳华</button> */}
+        <TransitionButton
+          isActive={false}
+          action={() => {
+            setFangHua(f => !f);
+            setFirst(n => ++n);
+          }}
+        >
+          芳华
+        </TransitionButton>
       </div>
       <hr />
 
@@ -51,6 +64,7 @@ export default function Movies() {
       {selected === 'ainocorrida' && <AiNoCorrida />}
       {selected === 'transpotting' && <Trainspotting />}
       {show && <Piano />}
+      {fangHua && <FangHua />}
     </div>
   );
 }
@@ -60,25 +74,35 @@ function AiNoCorrida() {
 }
 
 function Trainspotting() {
+  console.log('Trainspotting rendering');
   return <h1 style={{ color: 'hsl(240.35deg 74.43% 71.9%)' }}>Transpotting</h1>;
 }
 
 function Piano() {
+  console.log('Piano rendering');
   return <h1 style={{ color: 'green' }}>钢的琴</h1>;
 }
 
-function Ring() {
+const Ring = memo(function Ring() {
   let rings = [];
   for (let i = 0; i < 5; i++) {
-    rings.push(<RingItem key={i} />);
+    rings.push(<RingItem key={i} index={i} />);
   }
   return <ul className={styles['ring']}>{rings}</ul>;
-}
+});
 
-function RingItem() {
+function RingItem({ index }: { index: number }) {
+  console.log(`ring${index} rendering`);
   slowdown(300);
   return <li>RingRingRing...</li>;
 }
+
+const FangHua = memo(function FangHua() {
+  console.log('fanghua rendering');
+  slowdown(1000);
+
+  return <h1>芳华</h1>;
+});
 
 interface TransitionButtonProp {
   action: () => void | Promise<any>;
@@ -97,7 +121,11 @@ function TransitionButton({ action, children, isActive }: TransitionButtonProp) 
     );
   }
 
-  return <button onClick={handleClick}>{children}</button>;
+  return (
+    <button className={styles['transition-btn']} onClick={handleClick}>
+      {children}
+    </button>
+  );
 
   function handleClick() {
     startTransition(async () => {
