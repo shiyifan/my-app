@@ -2,12 +2,14 @@ import { memo, useState, useTransition, type ReactNode } from 'react';
 import styles from './Movies.module.scss';
 
 export default function Movies() {
+  const [isPending, startTransition] = useTransition();
+
   const [selected, setSelected] = useState<'ring' | 'ainocorrida' | 'transpotting'>('ainocorrida');
   const [show, setShow] = useState(false);
   const [fangHua, setFangHua] = useState(true);
 
   const [first, setFirst] = useState(0);
-  const [second, setSecond] = useState({ name: '' });
+  const [text, setText] = useState('');
 
   return (
     <div className={styles['movies']}>
@@ -25,7 +27,6 @@ export default function Movies() {
           isActive={selected === 'ring'}
           action={() => {
             setSelected('ring');
-            setShow(s => !s);
           }}
         >
           午夜凶铃
@@ -56,6 +57,15 @@ export default function Movies() {
         >
           芳华
         </TransitionButton>
+
+        <input
+          type="text"
+          value={text}
+          onChange={e => {
+            // startTransition(() => setText(e.target.value));
+            setText(e.target.value);
+          }}
+        />
       </div>
       <hr />
 
