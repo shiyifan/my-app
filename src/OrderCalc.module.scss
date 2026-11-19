@@ -3,21 +3,39 @@
   flex-flow: row nowrap;
 
   & > * {
-    flex-basis: 10%;
+    flex-basis: 20%;
   }
 }
 
 .order-calc {
 }
 
+.order-calc-title {
+  margin-block: 0.3em;
+}
+
+$board-font-size: 1.2em;
 .order-calc-btn {
+  font-size: $board-font-size;
+}
+
+.order-calc-amount {
+  font-size: $board-font-size;
+  text-align: center;
 }
 
 .order-calc-board {
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
 
   & > * {
-    flex-basis: 10%;
+    flex-basis: 20%;
   }
+}
+
+.order-calc-sum {
+  margin-block-start: 0.2em;
+  margin-block-end: 0;
+  font-size: 1.5em;
 }
