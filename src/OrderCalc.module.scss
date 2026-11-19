@@ -1,0 +1,23 @@
+.two-order-calc {
+  display: flex;
+  flex-flow: row nowrap;
+
+  & > * {
+    flex-basis: 10%;
+  }
+}
+
+.order-calc {
+}
+
+.order-calc-btn {
+}
+
+.order-calc-board {
+  display: flex;
+  flex-flow: row nowrap;
+
+  & > * {
+    flex-basis: 10%;
+  }
+}

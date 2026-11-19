@@ -14,6 +14,7 @@ import { Posts, PostsDecl } from './Posts.js';
 import OnlineIndicator from './OnlineIndicator.js';
 import FancyWrapper from './FancyWrapper.js';
 import Movies from './Movies.js';
+import OrderCalc from './OrderCalc.js';
 
 export default function App() {
   const [index, setIndex] = useState(0);
@@ -31,6 +32,10 @@ export default function App() {
       <section>
         <OnlineIndicator onOnlineChanged={onlineHandler} />
         <StyledButton onClick={() => setIndex(index + 1)}>(App) Click Me!({index})</StyledButton>
+
+        <FancyWrapper>
+          <OrderCalc></OrderCalc>
+        </FancyWrapper>
 
         <FancyWrapper>
           <div className="two-posts">
