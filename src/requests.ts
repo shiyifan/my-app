@@ -33,8 +33,33 @@ export function postOrder(amount: number, signal?: AbortSignal): Promise<number>
 
 export function postFormRequest() {}
 
-function createAbortable(signal: AbortSignal) {
+type ResolveFunc<T> = (value: T) => void;
+type RejectFunc = (reason?: any) => void;
 
+function createAbortablePromise<T>(
+  executor: (resolve: ResolveFunc<T | PromiseLike<T>>, reject: RejectFunc) => void,
+  signal: AbortSignal,
+): Promise<T> {
+  if (signal.aborted) {
+    return Promise.reject('aborted, reason: ' + signal.reason);
+  }
+
+  const userPromise = new Promise((res, rej) => {
+    executor(res, rej);
+    signal.addEventListener('abort', onAbort);
+  }).finally(() => {
+    signal.removeEventListener('abort', onAbort);
+  });
+
+  return new Promise<T>((res, rej) => {
+    executor(res, rej);
+
+    signal.addEventListener('abort', onAbort);
+  });
+
+  function onAbort() {
+    // rej(signal?.reason);
+  }
 }
 
 /* timeout range: [500, 1500]ms */
