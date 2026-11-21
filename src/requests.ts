@@ -8,27 +8,15 @@ export function postOrder(amount: number, signal?: AbortSignal): Promise<number>
     });
   }
 
-  if (signal.aborted) {
-    return Promise.reject('post aborted, reason: ' + signal.reason);
-  }
-
-  return new Promise((resolve, reject) => {
+  return createAbortablePromise((resolve, reject) => {
     setTimeout(() => {
       if (amount > 10) {
         reject({ message: 'too many orders', current: 11 });
       } else {
         resolve(amount);
       }
-      signal.removeEventListener('abort', onAbort);
     }, randTO);
-
-    signal.addEventListener('abort', onAbort);
-
-    function onAbort() {
-      console.error('postOrder aborted!');
-      reject(signal?.reason);
-    }
-  });
+  }, signal);
 }
 
 export function postFormRequest() {}
@@ -38,28 +26,20 @@ type RejectFunc = (reason?: any) => void;
 
 function createAbortablePromise<T>(
   executor: (resolve: ResolveFunc<T | PromiseLike<T>>, reject: RejectFunc) => void,
-  signal: AbortSignal,
+  abortSignal: AbortSignal,
 ): Promise<T> {
-  if (signal.aborted) {
-    return Promise.reject('aborted, reason: ' + signal.reason);
+  if (abortSignal.aborted) {
+    return Promise.reject('aborted, reason: ' + abortSignal.reason);
   }
 
-  const userPromise = new Promise((res, rej) => {
-    executor(res, rej);
-    signal.addEventListener('abort', onAbort);
-  }).finally(() => {
-    signal.removeEventListener('abort', onAbort);
-  });
-
+  let onAbort: () => void;
   return new Promise<T>((res, rej) => {
     executor(res, rej);
-
-    signal.addEventListener('abort', onAbort);
+    onAbort = () => rej(abortSignal?.reason);
+    abortSignal.addEventListener('abort', onAbort);
+  }).finally(() => {
+    abortSignal.removeEventListener('abort', onAbort);
   });
-
-  function onAbort() {
-    // rej(signal?.reason);
-  }
 }
 
 /* timeout range: [500, 1500]ms */
