@@ -31,6 +31,12 @@ export function postOrder(amount: number, signal?: AbortSignal): Promise<number>
   });
 }
 
+export function postFormRequest() {}
+
+function createAbortable(signal: AbortSignal) {
+
+}
+
 /* timeout range: [500, 1500]ms */
 function randTimeout() {
   return Math.floor(Math.random() * 1000 + 500);

@@ -2,6 +2,7 @@ import { startTransition, useActionState, useOptimistic, useRef, useState, useTr
 import styles from './OrderCalc.module.scss';
 import { postOrder } from './requests';
 import OrderCalculator, { type CalcOP } from './OrderCalculator';
+import OptimisticForm from './OptimisticForm';
 
 export default function OrderCalc() {
   return (
@@ -11,6 +12,7 @@ export default function OrderCalc() {
         <OrderCalcTransition />
         <OrderCalcActionState />
         <OrderCalcCheckout />
+        <OptimisticForm />
       </div>
     </div>
   );
