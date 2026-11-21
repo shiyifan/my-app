@@ -15,7 +15,7 @@ export function postOrder(amount: number, signal?: AbortSignal): Promise<number>
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (amount > 10) {
-        reject('too many orders');
+        reject({ message: 'too many orders', current: 11 });
       } else {
         resolve(amount);
       }

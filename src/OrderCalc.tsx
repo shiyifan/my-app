@@ -92,7 +92,9 @@ function OrderCalcCheckout() {
 
   const sum = state.amount * 1000;
 
-  return <OrderCalculator title={'Checkout'} amount={opAmount} sum={sum} isPending={isPending} onUpdate={handleUpdate} />;
+  return (
+    <OrderCalculator title={'Checkout'} amount={opAmount} sum={sum} isPending={isPending} onUpdate={handleUpdate} />
+  );
 
   function handleUpdate(type: CalcOP) {
     if (abort.current != null) {
@@ -126,7 +128,7 @@ async function amountReducer(prevState: CheckoutState, payload: SumPayload): Pro
     }
 
     console.error('postOrder throw: ', e);
-    return { ...prevState, error: e };
+    return { amount: e.current, error: e.message };
   }
 }
 
