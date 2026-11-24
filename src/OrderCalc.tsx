@@ -13,6 +13,7 @@ export default function OrderCalc() {
         <OrderCalcActionState />
         <OrderCalcCheckout />
         <OptimisticForm />
+        <OptimisticForm />
       </div>
     </div>
   );
@@ -64,8 +65,8 @@ function OrderCalcActionState() {
         abort.current = new AbortController();
 
         startTransition(() => {
-          dispathSum({ type, signal: abort.current?.signal });
-          // dispathSum({ type });
+          // dispathSum({ type, signal: abort.current?.signal });
+          dispathSum({ type });
         });
       }}
     />

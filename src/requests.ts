@@ -19,7 +19,28 @@ export function postOrder(amount: number, signal?: AbortSignal): Promise<number>
   }, signal);
 }
 
-export function postFormRequest() {}
+let formCount = 0;
+export function onlyAsync(signal?: AbortSignal) {
+  const c = ++formCount;
+  const randTO = randTimeout(1000);
+
+  if (signal == null) {
+    return new Promise<void>(resolve => {
+      console.log(`(${c})post form...`);
+      setTimeout(() => {
+        resolve();
+        console.log(`(${c})post form... end`);
+      }, randTO);
+    });
+  }
+  return createAbortablePromise<void>(resolve => {
+    console.log('post form...');
+    setTimeout(() => {
+      resolve();
+      console.log('post form...end');
+    }, randTO);
+  }, signal);
+}
 
 type ResolveFunc<T> = (value: T) => void;
 type RejectFunc = (reason?: any) => void;
@@ -43,6 +64,6 @@ function createAbortablePromise<T>(
 }
 
 /* timeout range: [500, 1500]ms */
-function randTimeout() {
-  return Math.floor(Math.random() * 1000 + 500);
+function randTimeout(min = 500, range = 1000) {
+  return Math.floor(Math.random() * range + min);
 }
