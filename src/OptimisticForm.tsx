@@ -56,22 +56,22 @@ function OneLine({ c }: { c: number }) {
 
   const [n, setN] = useState(0);
 
-  // const [opC, updateOpC] = useOptimistic(c);
-  const [opC, updateOpC] = useOptimistic(c, c => {
-    console.log('opC dispatch: ', c);
-    return c + 1;
-  });
+  const [opC, updateOpC] = useOptimistic(c);
+  // const [opC, updateOpC] = useOptimistic(c, c => {
+  //   console.log('opC dispatch: ', c);
+  //   return c + 1;
+  // });
 
   return (
     <div>
       <button
         onClick={() =>
           startT3(async () => {
-            // updateOpC(opC => {
-            //   console.log('opC updater: ', opC);
-            //   return opC + 1;
-            // });
-            updateOpC(null);
+            updateOpC(opC => {
+              console.log('opC updater: ', opC);
+              return opC + 1;
+            });
+            // updateOpC(null);
 
             // setOp(true);
             await onlyAsync();
@@ -84,6 +84,7 @@ function OneLine({ c }: { c: number }) {
       <button
         onClick={() => {
           startTransition(async () => {
+            console.log('T4 trans...');
             setN(n => {
               console.log('T4 prev n: ', n);
               return n + 1;
