@@ -8,10 +8,10 @@ export default function GreetDialog() {
 
   useEffect(() => {
     console.log('schedule...', text);
-    const id = setTimeout(() => console.log(text), 3000);
+    // const id = setTimeout(() => console.log(text), 3000);
     return () => {
       console.log('cancel: ', text);
-      clearTimeout(id);
+      // clearTimeout(id);
     };
   }, [text]);
 
