@@ -1,6 +1,10 @@
-import { startTransition, useActionState, useOptimistic, useState, useTransition } from 'react';
+import { startTransition, useActionState, useOptimistic, useReducer, useState, useTransition } from 'react';
 import { onlyAsync } from './requests';
 import styles from './OptimisticForm.module.scss';
+import chalk from 'chalk';
+
+const RED = chalk.red;
+const BLUE = chalk.blue;
 
 export default function OpForm() {
   const [submitting, setSubmitting] = useOptimistic(false);
@@ -33,6 +37,7 @@ export default function OpForm() {
         T0{t0Pending && '...'}
       </button>
       {c2}
+
       <button
         onClick={() => {
           setC(c + 1);
@@ -55,6 +60,12 @@ function OneLine({ c }: { c: number }) {
   const [op, setOp] = useOptimistic(false);
 
   const [n, setN] = useState(0);
+  // const [n, dspN] = useReducer(prev => {
+  //   console.log('dispath N: ', prev);
+  //   return prev + 1;
+  // }, 0);
+
+  const [m, setM] = useState(0);
 
   const [opC, updateOpC] = useOptimistic(c);
   // const [opC, updateOpC] = useOptimistic(c, c => {
@@ -81,10 +92,12 @@ function OneLine({ c }: { c: number }) {
         T3{t3Pending && '...'}
       </button>
       {opC}
+
       <button
         onClick={() => {
           startTransition(async () => {
-            console.log('T4 trans...');
+            // console.log('T4 trans...');
+            // dspN();
             setN(n => {
               console.log('T4 prev n: ', n);
               return n + 1;
@@ -96,6 +109,21 @@ function OneLine({ c }: { c: number }) {
         T4
       </button>
       {n}
+
+      <button
+        onClick={() => {
+          console.log(`T4 ${RED('sync')}...`);
+          // setM(m + 1);
+          setN(n => {
+            console.log(`T4 ${RED('sync')} n: `, n);
+            return n + 1;
+          });
+          // dspN();
+        }}
+      >
+        T4(Sync)
+      </button>
+      {m}
     </div>
   );
 

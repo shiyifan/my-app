@@ -3,6 +3,7 @@ import styles from './OrderCalc.module.scss';
 import { postOrder } from './requests';
 import OrderCalculator, { type CalcOP } from './OrderCalculator';
 import OptimisticForm from './OptimisticForm';
+import Books from './Books';
 
 export default function OrderCalc() {
   return (
@@ -13,7 +14,7 @@ export default function OrderCalc() {
         <OrderCalcActionState />
         <OrderCalcCheckout />
         <OptimisticForm />
-        <OptimisticForm />
+        <Books />
       </div>
     </div>
   );

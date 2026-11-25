@@ -22,7 +22,7 @@ export function postOrder(amount: number, signal?: AbortSignal): Promise<number>
 let formCount = 0;
 export function onlyAsync(signal?: AbortSignal) {
   const c = ++formCount;
-  const randTO = randTimeout(1000);
+  const randTO = randTimeout(5000);
 
   if (signal == null) {
     return new Promise<void>(resolve => {
