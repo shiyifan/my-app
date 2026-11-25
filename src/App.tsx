@@ -1,6 +1,6 @@
 import './App.css';
 import data, { type Person } from './data.js';
-import { useCallback, useEffect, useEffectEvent, useState } from 'react';
+import { useCallback, useState } from 'react';
 import StyledButton from './StyledButton.js';
 import ScientistItem from './ScientistItem.js';
 import PlayerReg from './PlayerReg.js';

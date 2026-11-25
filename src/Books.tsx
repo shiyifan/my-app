@@ -1,13 +1,11 @@
 import { books } from './data';
 import styles from './Books.module.scss';
-import { memo, useDeferredValue, useState } from 'react';
-import { slowdown } from './utils';
+import { memo, useDeferredValue, useId, useState } from 'react';
 
 export default function Books() {
   const [bookCount, setBookCount] = useState('');
-  // const defCount = bookCount;
   const defCount = useDeferredValue(bookCount);
-  console.log('defCount: ', defCount);
+  const id = useId();
 
   let bookListDom;
   if (defCount === '' || isNaN(Number(defCount))) {
@@ -19,11 +17,9 @@ export default function Books() {
   return (
     <div className={styles['books-wrapper']}>
       <div className={styles['books-count']}>
-        <label>
-          Book Count:
-          <input type="number" value={bookCount} onChange={e => setBookCount(e.target.value)} />
-          {defCount !== bookCount && '...'}
-        </label>
+        <label htmlFor={id + 'bookcount'}>Book Count:</label>
+        <input id={id + 'bookcount'} type="number" value={bookCount} onChange={e => setBookCount(e.target.value)} />
+        {defCount !== bookCount && '...'}
       </div>
 
       {bookListDom}
