@@ -56,3 +56,11 @@ export const scores = [
   { id: 7, category: 'tree' as const, score: 72 },
   { id: 8, category: 'tree' as const, score: 60 },
 ];
+
+export const books = [
+  { name: 'A Tale Of Two Cities', author: 'Dickens' },
+  { name: 'The Call Of Cthulhu', author: 'Lovecraft' },
+  { name: 'Izu No Odoriko', author: 'Kawabata Yasunari' },
+  { name: 'Bailuyuan', author: 'Chen Zhongshi' },
+  { name: 'Love Of Life', author: 'Jack London' },
+];

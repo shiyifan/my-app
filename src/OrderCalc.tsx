@@ -10,11 +10,11 @@ export default function OrderCalc() {
     <div className={styles['order-calc-wrapper']}>
       <h1>Order Calc</h1>
       <div className={styles['two-order-calc']}>
+        <Books />
         <OrderCalcTransition />
         <OrderCalcActionState />
         <OrderCalcCheckout />
         <OptimisticForm />
-        <Books />
       </div>
     </div>
   );

@@ -1,0 +1,27 @@
+.books-list {
+  max-height: 150px;
+  overflow-y: scroll;
+}
+.books-count {
+  font-size: 1.2rem;
+
+  & input {
+    font-size: 1.2rem;
+    width: 130px;
+  }
+}
+
+.book {
+  margin-block: 0 0.8em;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.book-name {
+  font-weight: bold;
+}
+
+.book-author {
+  font-family: Arial, Helvetica, sans-serif;
+}

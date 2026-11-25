@@ -1,5 +1,6 @@
 import { memo, useState, useTransition, type ReactNode } from 'react';
 import styles from './Movies.module.scss';
+import { slowdown } from './utils.js';
 
 export default function Movies() {
   const [isPending, startTransition] = useTransition();
@@ -150,9 +151,4 @@ function TransitionButton({ action, children, isActive }: TransitionButtonProp) 
     });
     // action();
   }
-}
-
-function slowdown(duration: number) {
-  const start = performance.now();
-  while (performance.now() - start < duration);
 }
