@@ -1,3 +1,6 @@
+import { beatlesAlbums } from './data';
+export { type Album } from './data';
+
 /** This can be aborted */
 export function postOrder(amount: number, signal?: AbortSignal): Promise<number> {
   const randTO = randTimeout();
@@ -66,4 +69,26 @@ function createAbortablePromise<T>(
 /* timeout range: [500, 1500]ms */
 function randTimeout(min = 500, range = 1000) {
   return Math.floor(Math.random() * range + min);
+}
+
+const cachedAlbums = new Map();
+export function postAlbums(url: string) {
+  if (cachedAlbums.get(url) != null) {
+    return cachedAlbums.get(url);
+  }
+
+  const albums = getAlbums(url);
+  cachedAlbums.set(url, albums);
+  return albums;
+
+  async function getAlbums(url: string) {
+    await new Promise(resolve => {
+      setTimeout(resolve, 1000);
+    });
+
+    const y = url.substring(url.lastIndexOf('/') + 1);
+    if (y === '' || isNaN(Number(y))) return [];
+
+    return beatlesAlbums.filter(a => a.year === Number(y));
+  }
 }

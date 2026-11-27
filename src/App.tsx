@@ -1,6 +1,6 @@
 import './App.css';
 import data, { type Person } from './data.js';
-import { useCallback, useState } from 'react';
+import { Suspense, useCallback, useState } from 'react';
 import StyledButton from './StyledButton.js';
 import ScientistItem from './ScientistItem.js';
 import PlayerReg from './PlayerReg.js';
@@ -16,6 +16,7 @@ import FancyWrapper from './FancyWrapper.js';
 import Movies from './Movies.js';
 import OrderCalc from './OrderCalc.js';
 import TooltipButton from './TooltipButton.js';
+import AlbumLoader from './Albums.js';
 
 export default function App() {
   const [index, setIndex] = useState(0);
@@ -41,6 +42,8 @@ export default function App() {
         <TooltipButton style={{ fontSize: '1.2rem' }} tooltip={<h4>Hello Tooltip!</h4>}>
           Tooltip Button
         </TooltipButton>
+
+        <AlbumLoader></AlbumLoader>
 
         <FancyWrapper>
           <div className="two-posts">
