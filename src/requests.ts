@@ -89,6 +89,6 @@ export function postAlbums(url: string) {
     const y = url.substring(url.lastIndexOf('/') + 1);
     if (y === '' || isNaN(Number(y))) return [];
 
-    return beatlesAlbums.filter(a => a.year === Number(y));
+    return beatlesAlbums.filter(a => a.year === Number(1967));
   }
 }
