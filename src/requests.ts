@@ -1,5 +1,5 @@
 import { beatlesAlbums } from './data';
-export { type Album } from './data';
+import { type Album } from './data';
 
 /** This can be aborted */
 export function postOrder(amount: number, signal?: AbortSignal): Promise<number> {
@@ -72,7 +72,7 @@ function randTimeout(min = 500, range = 1000) {
 }
 
 const cachedAlbums = new Map();
-export function postAlbums(url: string) {
+export function postAlbums(url: string): Promise<Album[]> {
   if (cachedAlbums.get(url) != null) {
     return cachedAlbums.get(url);
   }

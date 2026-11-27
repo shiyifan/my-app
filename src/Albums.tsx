@@ -1,5 +1,6 @@
-import { Suspense, use, useState, startTransition, useDeferredValue } from 'react';
-import { postAlbums, type Album } from './requests';
+import { Suspense, use, useState } from 'react';
+import { postAlbums } from './requests';
+import type { Album } from './data';
 
 export default function AlbumLoader() {
   const [input, setInput] = useState('');
@@ -7,13 +8,17 @@ export default function AlbumLoader() {
 
   // const isPending = deferredInput !== input;
 
+  const albumsJsx = <Albums suffix={input} />;
+  console.log('jsx: ', albumsJsx);
+
   return (
     <div>
       <input type="text" value={input} onChange={e => setInput(e.target.value)} />
       {/* {isPending && '...'} */}
       {
         <Suspense fallback={<h3>Loading...</h3>}>
-          <Albums suffix={input} />
+          {/* <Albums suffix={input} /> */}
+          {albumsJsx}
         </Suspense>
       }
     </div>
@@ -21,7 +26,9 @@ export default function AlbumLoader() {
 }
 
 function Albums({ suffix }: { suffix: string }) {
-  const albums = use<Album[]>(postAlbums(`/albums/${suffix}`));
+  const p = postAlbums(`/albums/${suffix}`);
+  console.log('p: ', Object.keys(p));
+  const albums = use<Album[]>(p);
 
   const items = albums.map(a => {
     return (
