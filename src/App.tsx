@@ -15,6 +15,7 @@ import OnlineIndicator from './OnlineIndicator.js';
 import FancyWrapper from './FancyWrapper.js';
 import Movies from './Movies.js';
 import OrderCalc from './OrderCalc.js';
+import TooltipButton from './TooltipButton.js';
 
 export default function App() {
   const [index, setIndex] = useState(0);
@@ -36,6 +37,10 @@ export default function App() {
         <FancyWrapper>
           <OrderCalc></OrderCalc>
         </FancyWrapper>
+
+        <TooltipButton style={{ fontSize: '1.2rem' }} tooltip={<h4>Hello Tooltip!</h4>}>
+          Tooltip Button
+        </TooltipButton>
 
         <FancyWrapper>
           <div className="two-posts">
