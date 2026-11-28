@@ -83,7 +83,7 @@ export function postAlbums(url: string): Promise<Album[]> {
 
   async function getAlbums(url: string) {
     await new Promise(resolve => {
-      setTimeout(resolve, 1000);
+      setTimeout(resolve, 2000);
     });
 
     const y = url.substring(url.lastIndexOf('/') + 1);

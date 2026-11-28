@@ -27,7 +27,7 @@ export default function AlbumLoader() {
 
 function Albums({ suffix }: { suffix: string }) {
   const p = postAlbums(`/albums/${suffix}`);
-  console.log('p: ', Object.keys(p));
+  console.log('p: ', Object.assign({}, p));
   const albums = use<Album[]>(p);
 
   const items = albums.map(a => {
