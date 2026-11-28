@@ -6,15 +6,6 @@ export default function GreetDialog() {
   const [text, setText] = useState('');
   const [checked, setChecked] = useState(true);
 
-  useEffect(() => {
-    console.log('schedule...', text);
-    // const id = setTimeout(() => console.log(text), 3000);
-    return () => {
-      console.log('cancel: ', text);
-      // clearTimeout(id);
-    };
-  }, [text]);
-
   return (
     <div className={styles['greet-dialog']}>
       <button onClick={() => dlgDom.current?.showModal()}>Show Dialog</button>

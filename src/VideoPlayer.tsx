@@ -1,11 +1,9 @@
 import { useEffect, useRef } from 'react';
 
-let effectCount = 0;
 export default function VideoPlayer({ isPlaying }: { isPlaying: boolean }) {
   const videoDom = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    console.log('Video player effect: ', effectCount++);
     if (isPlaying) {
       videoDom.current?.play();
     } else {

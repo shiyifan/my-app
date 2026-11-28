@@ -108,9 +108,6 @@ function RingItem({ index }: { index: number }) {
 }
 
 const FangHua = memo(function FangHua() {
-  console.log('fanghua rendering');
-  slowdown(1000);
-
   return <h1>芳华</h1>;
 });
 
