@@ -1,6 +1,7 @@
 import { Suspense, use, useState } from 'react';
 import { postAlbums } from './requests';
 import type { Album } from './data';
+import { slowdown } from './utils';
 
 export default function AlbumLoader() {
   const [input, setInput] = useState('');
